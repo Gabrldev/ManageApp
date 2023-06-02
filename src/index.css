@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  color: white;
+}
+.bg {
+  background-image: radial-gradient(#272727 1px, #16131c 1.2px);
+  background-size: 28px 28px;
+}
+.bg-cursor {
+  background: radial-gradient(#586d96, #766d9c);
+}
+body{
+    overflow: hidden;
+}
