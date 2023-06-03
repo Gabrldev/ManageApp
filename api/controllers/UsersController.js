@@ -1,5 +1,5 @@
 import userModel from "../models/usersModel.js";
-import { encryptPass } from "../utils/encrypt.js";
+import { encryptPass, verifyPass } from "../utils/encrypt.js";
 import { createToken } from "../utils/jwt.js";
 export const RegisterUser = async (req, res) => {
   const { username, password } = req.body;
@@ -15,7 +15,7 @@ export const RegisterUser = async (req, res) => {
       password: hashedPass,
     });
     // create token
-    const jwtToken = createToken(username);
+    const jwtToken = createToken({ username, id: user._id});
 
     const data = {
       data: {
@@ -31,7 +31,27 @@ export const RegisterUser = async (req, res) => {
 };
 
 export const LoginUser = async (req, res) => {
-  res.send({
-    message: "Login User",
-  });
+  const { username, password } = req.body;
+
+  try {
+    const checkIs = await userModel.findOne({ username });
+    if (!checkIs) return res.stutus(404).send({ message: "User not found" });
+    const passHash = checkIs.password;
+    const isMatch = await verifyPass(password, passHash);
+    if (!isMatch) return res.status(400).send({ message: "Wrong password" });
+    // create token
+    const jwtToken = createToken({ username, id: checkIs._id });
+
+    const data = {
+      log: "Login success",
+      data: {
+        id: checkIs._id,
+        username: checkIs.username,
+      },
+      token: jwtToken,
+    };
+    res.send(data);
+  } catch (error) {
+    console.log(error.message);
+  }
 };

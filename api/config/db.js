@@ -6,7 +6,7 @@ async function connectDB() {
 
     // eslint-disable-next-line no-undef
     const DB_URL = process.env.MONGO_URL
-    await connect(DB_URL)
+    connect(DB_URL)
 }
 
 export default connectDB
