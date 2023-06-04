@@ -10,13 +10,14 @@ export const getBills = async (req, res) => {
   }
 };
 export const postBills = async (req, res) => {
-  const { userId, bills,description, name } = req.body;
+  const { userId, bills,description, name,date } = req.body;
   try {
     const createBills = await ModelBill.create({
       userId,
       bills: bills,
       description: description,
       name: name,
+      dateCreate: date
     });
     res.send(createBills);
   } catch (error) {

@@ -6,7 +6,7 @@ export const RegisterUser = async (req, res) => {
 
   try {
     const userIsUse = await userModel.findOne({ username });
-    if (userIsUse) return res.send({ message: "Username is already in use" });
+    if (userIsUse) return res.status(400).send({ message: "Username is use" });
     // encrypt password
     const hashedPass = await encryptPass(password);
     // create user

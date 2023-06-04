@@ -22,6 +22,7 @@ function FormBill(props) {
       description: "",
       bills: "",
       name: "",
+      date: ""
     });
   };
   return (
@@ -33,10 +34,12 @@ function FormBill(props) {
           type="text"
           value={formData.name}
           onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+          required
         />
         <input
           className="w-1/2 bg-[#0E0C14] h-10 rounded-md border-2 border-white/20 outline-none px-10"
           type="date"
+          onChange={(e)=>setFormData({...formData, date: e.target.value})}
         />
       </div>
       <div>
@@ -48,6 +51,7 @@ function FormBill(props) {
           onChange={(e) =>
             setFormData({ ...formData, description: e.target.value })
           }
+          required
         />
       </div>
       <div>
@@ -57,6 +61,7 @@ function FormBill(props) {
           placeholder="Price $%"
           value={formData.bills}
           onChange={(e) => setFormData({ ...formData, bills: e.target.value })}
+          required
         />
       </div>
       <button

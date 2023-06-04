@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { HandleLogin, HandleRegister } from "../utils/Auth";
+import { toast } from "react-hot-toast";
 
 function FormLogin() {
   const [auth, setAuth] = useState("login");
@@ -26,17 +27,24 @@ function FormLogin() {
         };
         localStorage.setItem("token", JSON.stringify(res));
         navigate("/home");
+      } else {
+        toast.error(response.message);
       }
     }
     //register
     else {
-      const response = await HandleRegister(data);
-      const res = {
-        id: response.data.user._id,
-        token: response.data.token,
-      };
-      localStorage.setItem("token", JSON.stringify(res));
-      navigate("/home");
+      try {
+        const response = await HandleRegister(data);
+        if (!response.ok) return toast.error(response.message);
+        const res = {
+          id: response.data.user._id,
+          token: response.data.token,
+        };
+        localStorage.setItem("token", JSON.stringify(res));
+        navigate("/home");
+      } catch (error) {
+        toast.error("Error Api Register");
+      }
     }
   };
   return (
@@ -45,8 +53,8 @@ function FormLogin() {
         {auth === "login" ? "Login" : "Register"}
       </h1>
       <form className="flex flex-col" onSubmit={handleSubmit}>
-        <label htmlFor="email" className="text-white/80">
-          Email
+        <label htmlFor="username" className="text-white/80">
+          Username
         </label>
         <input
           type="text"
@@ -74,7 +82,9 @@ function FormLogin() {
         </button>
 
         <p className="text-white/80 text-center mt-4">
-          {auth === "login" ? "You do not have an account?" : "Do you already have an account?"}
+          {auth === "login"
+            ? "You do not have an account?"
+            : "Do you already have an account?"}
           <span
             className="text-blue-500 cursor-pointer"
             onClick={() => setAuth(auth === "login" ? "register" : "login")}
