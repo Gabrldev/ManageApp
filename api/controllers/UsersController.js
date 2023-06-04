@@ -18,6 +18,7 @@ export const RegisterUser = async (req, res) => {
     const jwtToken = createToken({ username, id: user._id});
 
     const data = {
+      log: "Register success",
       data: {
         user,
         token: jwtToken,
@@ -35,7 +36,7 @@ export const LoginUser = async (req, res) => {
 
   try {
     const checkIs = await userModel.findOne({ username });
-    if (!checkIs) return res.stutus(404).send({ message: "User not found" });
+    if (!checkIs) return res.status(404).send({ message: "User not found" });
     const passHash = checkIs.password;
     const isMatch = await verifyPass(password, passHash);
     if (!isMatch) return res.status(400).send({ message: "Wrong password" });

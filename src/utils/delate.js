@@ -1,5 +1,7 @@
+const URL_BASE = import.meta.env.VITE_URL_BASE;
+
 export const handleDelete = async (_id) => {
-  const response = await fetch(`http://localhost:4001/bills/${_id}`, {
+  const response = await fetch(`${URL_BASE}/bills/${_id}`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",

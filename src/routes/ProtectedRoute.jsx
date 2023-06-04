@@ -4,12 +4,12 @@ import { Outlet } from "react-router-dom";
 
 function ProtectedRoute() {
   if (!localStorage.getItem("token")) {
-    return <Navigate to="/login" />;
+    return <Navigate to="/auth" />;
   }
-  return <>
-
-    <Outlet />
-  
-  </>;
+  return (
+    <>
+      <Outlet />
+    </>
+  );
 }
 export default ProtectedRoute;

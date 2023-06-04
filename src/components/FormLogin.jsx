@@ -1,7 +1,9 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { HandleLogin, HandleRegister } from "../utils/Auth";
 
 function FormLogin() {
+  const [auth, setAuth] = useState("login");
   const navigate = useNavigate();
   const [data, setData] = useState({
     username: "",
@@ -14,19 +16,25 @@ function FormLogin() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await fetch("http://localhost:4001/auth/login", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data),
-    });
-    const result = await response.json();
-    console.log(result);
-
-    const res = {
-      id: result.data.id,
-      token: result.token,
+    //login
+    if (auth === "login") {
+      const response = await HandleLogin(data);
+      if (response.log === "Login success") {
+        const res = {
+          id: response.data.id,
+          token: response.token,
+        };
+        localStorage.setItem("token", JSON.stringify(res));
+        navigate("/home");
+      }
     }
-    if (result.log === "Login success") {
+    //register
+    else {
+      const response = await HandleRegister(data);
+      const res = {
+        id: response.data.user._id,
+        token: response.data.token,
+      };
       localStorage.setItem("token", JSON.stringify(res));
       navigate("/home");
     }
@@ -34,7 +42,7 @@ function FormLogin() {
   return (
     <div className="bg-[#111016] w-96 rounded-md border border-white/10 px-6 py-10">
       <h1 className="text-white/80 text-2xl font-bold text-center mb-8">
-        Login
+        {auth === "login" ? "Login" : "Register"}
       </h1>
       <form className="flex flex-col" onSubmit={handleSubmit}>
         <label htmlFor="email" className="text-white/80">
@@ -62,14 +70,17 @@ function FormLogin() {
           type="submit"
           className="bg-[#2f80ed] text-white/80 rounded-sm py-1 mt-4"
         >
-          Login
+          {auth === "login" ? "Login" : "Registrar"}
         </button>
 
         <p className="text-white/80 text-center mt-4">
-          Don&nbsp;t or have an account?{" "}
-          <a href="" className="text-blue-500">
-            Register
-          </a>
+          {auth === "login" ? "You do not have an account?" : "Do you already have an account?"}
+          <span
+            className="text-blue-500 cursor-pointer"
+            onClick={() => setAuth(auth === "login" ? "register" : "login")}
+          >
+            {auth === "login" ? " Sign up" : " Log in"}
+          </span>
         </p>
       </form>
     </div>
