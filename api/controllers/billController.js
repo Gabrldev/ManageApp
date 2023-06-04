@@ -10,12 +10,13 @@ export const getBills = async (req, res) => {
   }
 };
 export const postBills = async (req, res) => {
-  const { userId, bills,description } = req.body;
+  const { userId, bills,description, name } = req.body;
   try {
     const createBills = await ModelBill.create({
       userId,
       bills: bills,
-      description: description
+      description: description,
+      name: name,
     });
     res.send(createBills);
   } catch (error) {
@@ -23,11 +24,14 @@ export const postBills = async (req, res) => {
   }
 };
 export const deleteBills = async (req, res) => {
-  const { id } = req.body;
+  const { id } = req.params;
   try {
     const deleteBills = await ModelBill.findByIdAndDelete(id);
-    res.send(deleteBills);
+    res.send({
+      message: "Delete success",
+      data: deleteBills,
+    });
   } catch (error) {
-    console.log(error.message);
+    res.status(404).send({ message: "Bills not found" });
   }
 };

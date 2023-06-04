@@ -13,6 +13,10 @@ const billsSchema = new Schema({
     type: String,
     required: true,
   },
+  name:{
+    type: String,
+    required: true,
+  },
   dateCreate: {
     type: Date,
     default: Date.now,
