@@ -1,6 +1,8 @@
+const URL_BASE = import.meta.env.VITE_URL_BASE;
+
 export async function postData (data) {
     const { userId, bills,description, name } = data
-    const response = await fetch('http://localhost:4001/bills',{
+    const response = await fetch(`${URL_BASE}/bills`,{
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ userId, bills,description, name })

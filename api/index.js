@@ -22,7 +22,7 @@ app.get("/api", (req, res) => {
 });
 
 
-app.use("/api", UserRoute);
+app.use("/api/auth", UserRoute);
 app.use('/api', BillRoute)
 
 
