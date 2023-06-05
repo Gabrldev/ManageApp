@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { postData } from "../utils/post";
 import { toast } from "react-hot-toast";
+import { postData } from "../utils/Crud";
 
 function FormBill(props) {
   // eslint-disable-next-line react/prop-types

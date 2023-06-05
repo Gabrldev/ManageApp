@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Toaster } from "react-hot-toast";
-import { getProfile } from "../../utils/getPostuser";
+import { getProfile } from "../../utils/Crud";
 import FormBill from "../../components/FormBill";
 import Viewdata from "../../components/Viewdata";
 

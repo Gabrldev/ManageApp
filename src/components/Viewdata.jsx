@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
-import { handleDelete } from "../utils/delate";
 import toast from "react-hot-toast";
 import { dateForm } from "../utils/Dateformt";
+import { handleDelete } from "../utils/Crud";
 function Viewdata(props) {
   const { data, setData } = props;
 
