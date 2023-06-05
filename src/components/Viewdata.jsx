@@ -3,10 +3,10 @@ import toast from "react-hot-toast";
 import { dateForm } from "../utils/Dateformt";
 import { handleDelete } from "../utils/Crud";
 function Viewdata(props) {
-  const { data, setData } = props;
+  const { data, setData,token } = props;
 
-  const handleDeleteData = async (_id) => {
-    const response = await handleDelete(_id);
+  const handleDeleteData = async (_id,) => {
+    const response = await handleDelete(_id,token);
     if (response.message === "Delete success") {
       const newData = data.filter((item) => item._id !== _id);
       setData(newData);
@@ -18,7 +18,7 @@ function Viewdata(props) {
 
   return (
     <section className="h-96 overflow-auto">
-      {data?.map((item) => {
+      {data ? data.map((item) => {
         return (
           <>
             <div className="flex items-center border-b-2">
@@ -74,7 +74,7 @@ function Viewdata(props) {
             </div>
           </>
         );
-      })}
+      }): <h1 className="text-2xl text-center">No data</h1>}
     </section>
   );
 }

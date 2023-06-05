@@ -5,15 +5,17 @@
 * {
   color: white;
 }
-.bg {
-  background-image: radial-gradient(#272727 1px, #16131c 1.2px);
-  background-size: 18px 18px;
-}
+  
+
 .bg-cursor {
   background: radial-gradient(#586d96, #766d9c);
 }
+
 body{
-    overflow: hidden;
+  overflow: hidden;
+  background-image: radial-gradient(#272727 1px, #16131c 1.2px);
+  background-size: 18px 18px;
+
 }
 
 ::-webkit-scrollbar{
@@ -32,4 +34,35 @@ body{
 }
 input {
   color-scheme: dark;
+}
+
+.bg2::after{
+  content: '';
+  position: absolute;
+  bottom: -300px;
+  left: -300px;
+  width: 600px;
+  height: 500px;
+  background: radial-gradient(#16131c, #acacac);
+  opacity: 0.4;
+  filter: blur(150px);
+  overflow: hidden;
+}
+.bg2::before{
+  content: '';
+  position: absolute;
+  bottom: 500px;
+  right: -300px;
+  width: 600px;
+  height: 500px;
+  background: radial-gradient(#16131c, #c6cece);
+  opacity: 0.3;
+  filter: blur(150px);
+  overflow: hidden;
+}
+
+@media (max-width: 768px) {
+  .bg2::before{
+    content: none;
+  }  
 }

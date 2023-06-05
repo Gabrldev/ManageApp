@@ -1,8 +1,5 @@
 const URL_BASE = import.meta.env.VITE_URL_BASE;
-const AUTH = localStorage?.getItem("token");
-const { token } = JSON.parse(AUTH) || {};
-
-export async function getProfile(id) {
+export async function getProfile(id, token) {
   const response = await fetch(`${URL_BASE}/bills/${id}`, {
     method: "GET",
     headers: {
@@ -14,7 +11,7 @@ export async function getProfile(id) {
   return result;
 }
 
-export async function postData(data) {
+export async function postData(data, token) {
   const { userId, bills, description, name, date } = data;
   const response = await fetch(`${URL_BASE}/bills`, {
     method: "POST",
@@ -28,7 +25,7 @@ export async function postData(data) {
   return resData;
 }
 
-export const handleDelete = async (_id) => {
+export const handleDelete = async (_id,token) => {
   const response = await fetch(`${URL_BASE}/bills/${_id}`, {
     method: "DELETE",
     headers: {

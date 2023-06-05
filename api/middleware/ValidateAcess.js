@@ -5,7 +5,6 @@ export const ValidateAccess = (req, res, next) => {
   if (!token) {
     return res.status(401).json({ message: "Access denied" });
   } else {
-
     try {
       const decoded = verifyToken(token);
       req.user = decoded;

@@ -38,7 +38,7 @@ function FormLogin() {
     else {
       try {
         const response = await HandleRegister(data);
-        if (!response.ok) return toast.error(response.message);
+        if (response.message) return toast.error(response.message);
         const res = {
           id: response.data.user._id,
           token: response.data.token,

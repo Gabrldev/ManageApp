@@ -4,7 +4,7 @@ import { postData } from "../utils/Crud";
 
 function FormBill(props) {
   // eslint-disable-next-line react/prop-types
-  const { data, setData, id } = props;
+  const { data, setData, id, token } = props;
   const [formData, setFormData] = useState({
     userId: id,
     description: "",
@@ -14,7 +14,7 @@ function FormBill(props) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await postData(formData);
+    const response = await postData(formData, token);
     toast.success("Success add data");
     setData([...data, response]);
     setFormData({
@@ -22,7 +22,7 @@ function FormBill(props) {
       description: "",
       bills: "",
       name: "",
-      date: ""
+      date: "",
     });
   };
   return (
@@ -39,7 +39,7 @@ function FormBill(props) {
         <input
           className="w-1/2 bg-[#0E0C14] h-10 rounded-md border-2 border-white/20 outline-none px-10 max-sm:text-xs"
           type="date"
-          onChange={(e)=>setFormData({...formData, date: e.target.value})}
+          onChange={(e) => setFormData({ ...formData, date: e.target.value })}
         />
       </div>
       <div>
@@ -58,7 +58,7 @@ function FormBill(props) {
         <input
           type="number"
           className="w-full bg-[#0E0C14] h-10 rounded-md border-2 border-white/20 outline-none placeholder:text-[#525252] placeholder:font-semibold px-5 max-sm:placeholder:text-xs"
-          placeholder="Price $%"
+          placeholder="Price $"
           value={formData.bills}
           onChange={(e) => setFormData({ ...formData, bills: e.target.value })}
           required
