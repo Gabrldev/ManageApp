@@ -29,7 +29,7 @@ function FormBill(props) {
     <form className="w-full flex gap-4 flex-col" onSubmit={handleSubmit}>
       <div className="flex gap-4">
         <input
-          className="w-1/2 bg-[#0E0C14] h-10 rounded-md border-2 border-white/20 outline-none placeholder:text-[#525252] placeholder:font-semibold px-5"
+          className="w-1/2 bg-[#0E0C14] h-10 rounded-md border-2 border-white/20 outline-none placeholder:text-[#525252] placeholder:font-semibold max-sm:placeholder:text-xs px-5"
           placeholder="Name of transaction"
           type="text"
           value={formData.name}
@@ -37,7 +37,7 @@ function FormBill(props) {
           required
         />
         <input
-          className="w-1/2 bg-[#0E0C14] h-10 rounded-md border-2 border-white/20 outline-none px-10"
+          className="w-1/2 bg-[#0E0C14] h-10 rounded-md border-2 border-white/20 outline-none px-10 max-sm:text-xs"
           type="date"
           onChange={(e)=>setFormData({...formData, date: e.target.value})}
         />
@@ -45,7 +45,7 @@ function FormBill(props) {
       <div>
         <input
           type="text"
-          className="w-full bg-[#0E0C14] h-10 rounded-md border-2 border-white/20 outline-none placeholder:text-[#525252] placeholder:font-semibold px-5"
+          className="w-full bg-[#0E0C14] h-10 rounded-md border-2 border-white/20 outline-none placeholder:text-[#525252] placeholder:font-semibold px-5 max-sm:placeholder:text-xs"
           placeholder="Description"
           value={formData.description}
           onChange={(e) =>
@@ -57,7 +57,7 @@ function FormBill(props) {
       <div>
         <input
           type="number"
-          className="w-full bg-[#0E0C14] h-10 rounded-md border-2 border-white/20 outline-none placeholder:text-[#525252] placeholder:font-semibold px-5"
+          className="w-full bg-[#0E0C14] h-10 rounded-md border-2 border-white/20 outline-none placeholder:text-[#525252] placeholder:font-semibold px-5 max-sm:placeholder:text-xs"
           placeholder="Price $%"
           value={formData.bills}
           onChange={(e) => setFormData({ ...formData, bills: e.target.value })}

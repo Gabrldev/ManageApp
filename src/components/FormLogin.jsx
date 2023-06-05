@@ -26,7 +26,10 @@ function FormLogin() {
           token: response.token,
         };
         localStorage.setItem("token", JSON.stringify(res));
-        navigate("/home");
+        toast.loading("Redirect to home",{duration:1000});
+        setTimeout(() => {
+          navigate("/home");
+        }, 1200);
       } else {
         toast.error(response.message);
       }

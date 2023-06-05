@@ -21,14 +21,14 @@ function Dashboard() {
 
   const BASE_HEADER = `${
     total >= 0 ? "bg-green-500" : "bg-red-500"
-  } w-[550px] h-20 flex justify-center items-center rounded-md text-white text-2xl font-semibold text-center  mb-10`;
+  } w-[550px] max-sm:w-[360px] h-20 flex justify-center items-center rounded-md text-white text-2xl font-semibold text-center  mb-10`;
   return (
     <div className="bg-black h-screen flex flex-col justify-center items-center bg">
       <Toaster />
       <header className={BASE_HEADER}>
         <h2 className={"text-white text-xl font-semibold"}>$ {total}</h2>
       </header>
-      <main className="w-[550px]">
+      <main className="w-[550px] max-sm:w-[360px]">
         <FormBill data={data} setData={setData} id={id} />
         <Viewdata data={data} setData={setData} />
       </main>

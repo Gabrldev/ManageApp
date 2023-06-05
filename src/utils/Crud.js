@@ -1,6 +1,6 @@
 const URL_BASE = import.meta.env.VITE_URL_BASE;
-const AUTH = localStorage.getItem("token");
-const { token } = JSON.parse(AUTH);
+const AUTH = localStorage?.getItem("token");
+const { token } = JSON.parse(AUTH) || {};
 
 export async function getProfile(id) {
   const response = await fetch(`${URL_BASE}/bills/${id}`, {
