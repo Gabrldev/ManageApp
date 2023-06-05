@@ -3,6 +3,7 @@ import { Toaster } from "react-hot-toast";
 import { getProfile } from "../../utils/Crud";
 import FormBill from "../../components/FormBill";
 import Viewdata from "../../components/Viewdata";
+import Header from "../../components/Header";
 
 function Dashboard() {
   // get token from localStorage
@@ -17,18 +18,19 @@ function Dashboard() {
   // get total bills
   const total = data
     ?.map((item) => parseInt(item.bills))
-    .reduce((a, b) => a + b, 0);
+    .reduce((a, b) => a + b, 0) || 0;
 
-  const BASE_HEADER = `${
+  const BG_TOTAL = `${
     total >= 0 ? "bg-green-500" : "bg-red-500"
   } w-[550px] max-sm:w-[360px] h-20 flex justify-center items-center rounded-md text-white text-2xl font-semibold text-center  mb-10`;
   return (
-    <div className="bg-black h-screen flex flex-col justify-center items-center bg">
+    <div className=" h-screen flex flex-col justify-center items-center bg bg2">
+      <Header />
       <Toaster />
-      <header className={BASE_HEADER}>
-        <h2 className={"text-white text-xl font-semibold"}>$ {total}</h2>
-      </header>
       <main className="w-[550px] max-sm:w-[360px]">
+      <section className={BG_TOTAL}>
+        <h2 className={"text-white text-xl font-semibold"}>$ {total}</h2>
+      </section>
         <FormBill data={data} setData={setData} id={id} />
         <Viewdata data={data} setData={setData} />
       </main>

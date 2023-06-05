@@ -11,7 +11,7 @@ function LandingLogin() {
         clear reports.
       </p>
       <Link
-        to="/auth"
+        to="/home"
         className="bg-white px-10 py-2 rounded-md text-black/90 hover:bg-slate-300 font-semibold border-none"
       >
         Get Started
